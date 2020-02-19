@@ -1,6 +1,5 @@
 package com.mars.weatherService.controllers;
 
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -8,7 +7,10 @@ import com.google.gson.JsonParser;
 import com.mars.weatherService.domain.Sol;
 import com.mars.weatherService.services.WeatherService;
 import org.springframework.http.HttpStatus;
+import org.springframework.scheduling.config.FixedRateTask;
 import org.springframework.web.bind.annotation.*;
+
+import org.springframework.scheduling.annotation.Scheduled;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -41,6 +43,7 @@ public class SolController {
         return weatherService.findSolById(id);
     }
 
+    @Scheduled(fixedRate = 600000)
     @PostMapping
     public void getSols() throws IOException {
         String link = "https://api.nasa.gov/insight_weather/?api_key=DEMO_KEY&feedtype=json&ver=1.0";
