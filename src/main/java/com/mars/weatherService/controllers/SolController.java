@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(SolController.BASE_URL)
 public class SolController {
     public static final String BASE_URL = "api/sols";
@@ -28,11 +29,13 @@ public class SolController {
         this.weatherService = weatherService;
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping
     List<Sol> getAllSols(){
         return weatherService.findAllSols();
     }
 
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/{id}")
     public Sol getSolById(@PathVariable Long id){
         return weatherService.findSolById(id);
